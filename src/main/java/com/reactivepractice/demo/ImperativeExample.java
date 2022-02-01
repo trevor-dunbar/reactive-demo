@@ -14,22 +14,17 @@ public class ImperativeExample {
 
     private static final Logger log = LoggerFactory.getLogger(ImperativeExample.class);
 
-    @GetMapping("/imperative")
-    private String callExternalService_blocking(){
-        RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate = new RestTemplate();
 
+    @GetMapping("/blocking")
+    public String callExternalService_blocking() {
+
+        log.info("Making imperative call to /hello");
         ResponseEntity<String> response = restTemplate.exchange("http://localhost:8081/hello", HttpMethod.GET, HttpEntity.EMPTY, String.class);
 
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
-        log.info("I had to wait for the external call to finish :(");
+        log.info("We had to wait for the external call to finish");
 
+        log.info(response.getBody());
         return response.getBody();
     }
 }
